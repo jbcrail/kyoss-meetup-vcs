@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Version Control Systems</title>
+
+  <link rel="stylesheet" href="./css/reset.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/showoff.css" type="text/css"/>
+
+  <script type="text/javascript" src="./js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src="./js/jquery-print.js"></script>
+  <script type="text/javascript" src="./js/jquery.batchImageLoad.js"></script>
+
+  <script type="text/javascript" src="./js/jquery.doubletap-0.1.js"></script>
+
+  <script type="text/javascript" src="./js/fg.menu.js"></script>
+  <script type="text/javascript" src="./js/showoff.js"></script>
+  <script type="text/javascript" src="./js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src="./js/sh_main.min.js"></script>
+  <script type="text/javascript" src="./js/core.js"></script>
+  <script type="text/javascript" src="./js/showoffcore.js"></script>
+
+  <link type="text/css" href="./css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href="./css/sh_style.css" rel="stylesheet" >
+
+  
+
+  
+
+  <script type="text/javascript">
+  $(function(){
+    setupPreso(false, './');
+  });
+  </script>
+</head>
+
+<body>
+
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+
+<div id="help">
+  <table>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">&larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">d</td><td>debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">z</td><td>toggle help (this)</td></tr>
+  </table>
+</div>
+
+<div class="buttonNav">
+  <input type="submit" onClick="prevStep();" value="prev"/>
+  <input type="submit" onClick="nextStep();" value="next"/>
+</div>
+
+<div id="preso">loading presentation...</div>
+<div id="footer">
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<div class="slide" data-transition="none"><div class="content center" ref="start/01_title">
+<p><img src="./file/start/img/vcs-title.png" width="960" height="720" alt="vcs-title"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental" ref="start/02_why">
+<pre><code><code class="command">$ ls -1F</code><code class="result">
+AwesomeApp/
+AwesomeApp-20110423163315/
+AwesomeApp-20110430220830/
+AwesomeApp-20110509223856/
+AwesomeApp-bugfix/
+AwesomeApp-v2/
+AwesomeApp-v2.1/
+AwesomeApp-v3/
+AwesomeApp-v3.1/
+AwesomeApp-v3.1.1/
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="start/03_history">
+<p><img src="./file/start/img/vcs-history.png" width="960" height="720" alt="vcs-history"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="basic/01_title">
+<h2>Basic</h2></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental" ref="basic/02_clone/1">
+<pre><code><code class="command">$ svn checkout URL local-dir</code><code class="result">
+A    local-dir/README
+A    local-dir/Rakefile
+A    local-dir/lib
+A    local-dir/lib/simplegit.rb
+Checked out revision 3.
+
+</code><code class="command">$ git clone URL local-dir</code><code class="result">
+Cloning into local-dir...
+remote: Counting objects: 13, done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 13 (delta 3), reused 13 (delta 3)
+Receiving objects: 100% (13/13), done.
+Resolving deltas: 100% (3/3), done.
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="basic/02_clone/2">
+<p><img src="./file/basic/img/clone.png" width="960" height="720" alt="clone"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental smaller" ref="basic/03_log">
+<pre><code><code class="command">$ svn log</code><code class="result">
+------------------------------------------------------------------------
+r3 | joseph | 2008-03-17 21:52:11 -0400 (Mon, 17 Mar 2008) | 1 line
+
+third
+------------------------------------------------------------------------
+r2 | joseph | 2008-03-15 16:40:33 -0400 (Sat, 15 Mar 2008) | 1 line
+
+second
+------------------------------------------------------------------------
+r1 | joseph | 2008-03-15 10:31:28 -0400 (Sat, 15 Mar 2008) | 1 line
+
+first
+------------------------------------------------------------------------
+
+</code><code class="command">$ git log</code><code class="result">
+commit ca82a6dff817ec66f44342007202690a93763949
+Author: Joseph Crail &lt;xyz@gmail.com&gt;
+Date:   Mon Mar 17 21:52:11 2008 -0400
+
+    third
+
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+Author: Joseph Crail &lt;xyz@gmail.com&gt;
+Date:   Sat Mar 15 16:40:33 2008 -0400
+
+    second
+
+commit a11bef06a3f659402fe7563abf99ad00de2209e6
+Author: Joseph Crail &lt;xyz@gmail.com&gt;
+Date:   Sat Mar 15 10:31:28 2008 -0400
+
+    first
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental" ref="basic/04_add/1">
+<pre><code><code class="command">$ svn add TODO</code><code class="result">
+A    TODO
+
+</code><code class="command">$ git add TODO</code><code class="result">
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="basic/04_add/2">
+<p><img src="./file/basic/img/add.png" width="960" height="720" alt="add"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental" ref="basic/05_status">
+<pre><code><code class="command">$ svn status</code><code class="result">
+A       TEST
+
+</code><code class="command">$ git status</code><code class="result">
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#   new file:   TODO
+#
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental" ref="basic/06_commit/1">
+<pre><code><code class="command">$ svn commit -m "fourth"</code><code class="result">
+Adding         TODO
+Transmitting file data .
+Committed revision 4.
+
+</code><code class="command">$ git commit -m "fourth"</code><code class="result">
+[master a543355] fourth
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 TODO
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="basic/06_commit/2">
+<p><img src="./file/basic/img/commit.png" width="960" height="720" alt="commit"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="branching/01_title">
+<h2>Branching</h2></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental" ref="branching/02_branch/1">
+<pre><code><code class="command">$ svn copy URL/trunk URL/branches/bugfix</code><code class="result">
+Committed revision 5.
+</code><code class="command">$ svn switch URL/branches/bugfix .</code><code class="result">
+</code><code class="command">$ &lt;add a new file and commit&gt;</code><code class="result">
+
+</code><code class="command">$ git checkout -b bugfix</code><code class="result">
+Switched to a new branch 'bugfix'
+</code><code class="command">$ &lt;add a new file and commit&gt;</code><code class="result">
+[bugfix c5e8c24] fifth
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 TEST
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="branching/02_branch/2">
+<p><img src="./file/branching/img/branch.png" width="960" height="720" alt="branch"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental" ref="branching/03_merge/1">
+<pre><code><code class="command">$ svn merge -r 4:HEAD URL/branches/bugfix</code><code class="result">
+</code><code class="command">$ &lt;commit merged changes into trunk&gt;</code><code class="result">
+
+</code><code class="command">$ git checkout master </code><code class="result">
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+</code><code class="command">$ git merge bugfix</code><code class="result">
+Updating a543355..c5e8c24
+Fast-forward
+ TEST |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 TEST
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="branching/03_merge/2">
+<p><img src="./file/branching/img/merge.png" width="960" height="720" alt="merge"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="etc/01_title/1">
+<h2>And the rest...</h2></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental smaller" ref="etc/01_title/2">
+<pre><code><code class="command">$ svn help</code><code class="result">
+Available subcommands:
+   add
+   blame (praise, annotate, ann)
+   cat
+   changelist (cl)
+   checkout (co)
+   cleanup
+   commit (ci)
+   copy (cp)
+   delete (del, remove, rm)
+   diff (di)
+   export
+   help (?, h)
+   import
+   info
+   list (ls)
+   lock
+   log
+   merge
+   mergeinfo
+   mkdir
+   move (mv, rename, ren)
+   propdel (pdel, pd)
+   propedit (pedit, pe)
+   propget (pget, pg)
+   proplist (plist, pl)
+   propset (pset, ps)
+   resolve
+   resolved
+   revert
+   status (stat, st)
+   switch (sw)
+   unlock
+   update (up)
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content commandline incremental smaller" ref="etc/01_title/3">
+<pre><code><code class="command">$ git help</code><code class="result">
+The most commonly used git commands are:
+   add        Add file contents to the index
+   bisect     Find by binary search the change that introduced a bug
+   branch     List, create, or delete branches
+   checkout   Checkout a branch or paths to the working tree
+   clone      Clone a repository into a new directory
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   fetch      Download objects and refs from another repository
+   grep       Print lines matching a pattern
+   init       Create an empty git repository or reinitialize an existing one
+   log        Show commit logs
+   merge      Join two or more development histories together
+   mv         Move or rename a file, a directory, or a symlink
+   pull       Fetch from and merge with another repository or a local branch
+   push       Update remote refs along with associated objects
+   rebase     Forward-port local commits to the updated upstream head
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+   show       Show various types of objects
+   status     Show the working tree status
+   tag        Create, list, delete or verify a tag object signed with GPG
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content commandline" ref="etc/01_title/4">
+<pre><code><code class="command">$ git add -p</code><code class="result">
+# interactively add hunks of content to staging area
+
+</code><code class="command">$ git commit --amend</code><code class="result">
+# amend the message of most recent commit
+
+</code><code class="command">$ git log --oneline --graph</code><code class="result">
+# show history with shortened commit messages
+
+</code><code class="command">$ git grep &lt;regexp&gt;</code><code class="result">
+# search working directory for regexp
+
+</code><code class="command">$ git grep &lt;regexp&gt; $(git rev-list --all)</code><code class="result">
+# search all commits on current branch for regexp
+</code></code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="internals/01_title/1">
+<h2>Internals</h2></div>
+</div><div class="slide" data-transition="none"><div class="content center" ref="internals/01_title/2">
+<p><img src="./file/internals/img/dag.png" width="960" height="720" alt="dag"/></p></div>
+</div><div class="slide" data-transition="none"><div class="content code smaller" ref="internals/01_title/3">
+<pre><code>$ git ls-tree 999902bd8ee2b07e19c96f11bddf475527fff3d4
+100644 blob 159202af1c0374e33374f2a0e20b5e0ecbc0c19e .gitignore
+100644 blob 37e1207dab85993425ee5f4ceb2a59055dccfc77 .gitmodules
+100644 blob e04728e8d391f57a6fa0c3325118750c602ef5ef Capfile
+100644 blob 2af0fb1133d03dcedf1f2bbca9a9b04444ef84f0 README
+100644 blob 3bb0e8592a41ae3185ee32266c860714980dbed7 Rakefile
+100644 blob 70d0345e4619e790993e852fe0ed1946d8d53afc TODO.txt
+040000 tree 875c4668c815306dcb1de23407973e2f1fb9d3a8 app
+040000 tree 942fb533688aa713f5302b525cf0b8cfeb245d8b config
+040000 tree da543b1ab388687f5612e6fb7c06fc778b8026bc db
+040000 tree 0269300738b048a5cc34769d1436d9f228499018 doc
+040000 tree 5a86b1e544e01c8951edafc39a3b0ca7bf09c2e9 lib
+040000 tree 0289883d028de7e3c8c54a7fa09c2851fda8346f public
+040000 tree 5ecf890b2a8c6d1e6b76b7d2ac25a4e40cf2cc67 script
+040000 tree c900b82e1d3f53af6392341f4ecf2a271961c26a spec
+040000 tree 3d5fc32106bf1848bcb79ef8a9f0fbf06e858fed vendor
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content code smaller" ref="internals/01_title/4">
+<pre><code>$ git cat-file -p e04728e8d391f57a6fa0c3325118750c602ef5ef
+load &#x2018;deploy&#x2019; if respond_to?(:namespace)
+Dir['vendor/plugins/*/recipes/*.rb'].each {
+    |plugin| load(plugin)
+    }
+
+load &#x2018;config/deploy&#x2019;
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content code smaller" ref="internals/01_title/5">
+<pre><code>$ git cat-file -p 875c4668c815306dcb1de23407973e2f1fb9d3a8
+040000 tree 3e6fae3a140890d75eb9d51ce0974f7969194661 controllers
+040000 tree 77b99dd8afcf55ad613d51e9e18a3df1aafa3f62 helpers
+040000 tree 41c9c92d8f11afe27f2f25fa6bad867d6427cfbe models
+040000 tree c958c76cd2ccda49b3d514a1a12b2236974300c2 sweepers
+040000 tree 850a76c0d5d056c43d56bc5d987836ea296584f4 views
+040000 tree 4c713208aee9f3bfb172424e3a68f2a1f10d715a workers
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content code smaller" ref="internals/01_title/6">
+<pre><code>$ git cat-file -p master:
+tree dcad9007245d68ff56d90fcf96af38f686eb61c1
+parent 4d9cb9b0d6248bb5c0868261039ef7f56ce47494
+author Jan Varwig &lt;jan@varwig.org&gt; 1300882710 +0100
+committer Jan Varwig &lt;jan@varwig.org&gt; 1300882710 +0100
+
+Wrote Helper methods in User to aid with taking down accounts
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content code smaller" ref="internals/01_title/7">
+<pre><code>$ git cat-file -p test_tag
+object 4a06c46ee6d58ce4be09954ee054921b18269cd6
+type commit
+tag test_tag
+tagger Jan Varwig &lt;jan@varwig.org&gt; Fri Apr 15 19:42:02 2011
+
+This is the message for the test tag
+</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="end/01_resources/1">
+<h2>Resources</h2></div>
+</div><div class="slide" data-transition="none"><div class="content smbullets incremental" ref="end/01_resources/2">
+<ul>
+<li>gollum</li>
+<li>git-blog</li>
+<li>git-issues</li>
+<li>bup</li>
+<li>gitmodel</li>
+<li>giddy</li>
+<li>SparkleShare</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content smbullets incremental" ref="end/01_resources/3">
+<ul>
+<li>git-scm.com</li>
+<li>gitref.org</li>
+<li>progit.org</li>
+<li>gitready.com</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content bullets" ref="end/01_resources/4">
+<ul>
+<li><img src="./file/end/img/svn-oreilly-cover.gif" width="180" height="236" alt="svn-oreilly"/> <img src="./file/end/img/git-oreilly-cover.gif" width="180" height="236" alt="git-oreilly"/></li>
+<li><img src="./file/end/img/pro-git-cover.jpg" width="240" height="240" alt="pro-git"/> <img src="./file/end/img/git-pragmatic-cover.jpg" width="240" height="240" alt="git-pragmatic"/></li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content smbullets" ref="end/01_resources/5">
+<ul>
+<li>Google Code</li>
+<li>GitHub</li>
+<li>Gitorious</li>
+<li>Bitbucket</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="end/02_credits/1">
+<h2>Credits</h2></div>
+</div><div class="slide" data-transition="none"><div class="content smbullets incremental" ref="end/02_credits/2">
+<ul>
+<li>Pro Git</li>
+<li>Better Explained</li>
+<li>Git for Computer Scientists</li>
+<li>Scott Chacon's Showoff</li>
+</ul>
+</div>
+</div><div class="slide" data-transition="none"><div class="content" ref="end/03_fin">
+<h2>Joseph Crail</h2>
+
+<h2>reddit.com/r/git</h2></div>
+</div></div>
+
+</body>
+</html>
